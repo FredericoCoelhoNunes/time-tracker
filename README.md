@@ -1,24 +1,7 @@
-# time_tracker
+# Time Tracker
 
-## Project setup
-```
-yarn install
-```
+A Desktop application for time tracking (stopwatch) coupled with some data analytics functionalities.
+This is a personal learning project! The main goals were:
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+* try to develop an end-to-end useful application using tools I wasn't familiar with.
+* try to learn some ways to better organize JS code.
