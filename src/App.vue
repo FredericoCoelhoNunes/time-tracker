@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <div class="main-window">
-      <div class="control-panel">
-          <p>This is the control panel</p>
-      </div>
       <div class="stopwatch-section">
         <div class="add-stopwatch-container">
+          <span>Time Tracker</span>
+          <button type="preferences" @click="openPreferences">Preferences</button>
           <button type="button" @click="addStopwatch">Add Stopwatch</button>
         </div>
         <div class="stopwatch-list">
@@ -43,12 +42,14 @@ export default {
       this.stopwatches.push({"uuid": uuid});
       uuid += 1;
     },
-    saveStopwatch(index, stopwatchData) {
-      this.saveToStorage(stopwatchData);
-      this.stopwatches.splice(index, 1);
+    openPreferences() {
+      this.stopwatches.push({"uuid": uuid});
+      uuid += 1;
     },
-    saveToStorage(stopwatchData) {
-      console.log(stopwatchData);
+    saveStopwatch(index, stopwatchData) {
+      // signalling to main process to save the stopwatch data
+      window.electronAPI.saveStopwatch(JSON.stringify(stopwatchData));
+      this.stopwatches.splice(index, 1);
     },
     deleteStopwatch(index) {
       this.stopwatches.splice(index, 1);

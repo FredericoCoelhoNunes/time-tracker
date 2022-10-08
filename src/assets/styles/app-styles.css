@@ -1,19 +1,27 @@
 .main-window {
   display: flex;
   width: 100%;
-  background-color: rgb(0, 0, 0);
 }
-.control-panel {
-  display: flex;
-  width: 50%;
-  background-color: aqua;
-  margin: 2% 2% 2% 2%;
+
+button {
+  -webkit-app-region: no-drag;
 }
+
+.add-stopwatch-container {
+  background-color: black;
+  color: white;
+  font-family: "Lucida Console", "Courier New", monospace;
+  text-align: center;
+  padding: 5% 5% 5% 5%;
+}
+.add-stopwatch-container > button {
+  margin: 5% 5% 5% 5%;
+}
+
 .stopwatch-section {
   display: flex;
   width: 50%;
   flex-direction: column;
-  background-color: rgb(125, 162, 218);
   margin: 2% 2% 2% 2%;
 }
 

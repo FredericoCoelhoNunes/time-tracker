@@ -1,6 +1,6 @@
 <template>
   <div class="my-stopwatch-container">
-    <div class="my-stopwatch-body bordered-section rounded">
+    <div class="my-stopwatch-body rounded">
       <div class="my-stopwatch-task">
         <div class="my-stopwatch-text-div">
           <span contenteditable @input="onInput" class="my-stopwatch-text heading">{{ task }}</span>
@@ -77,7 +77,6 @@ export default {
     },
     startStopwatch() {
       if (!this.stopwatch) {
-        console.log('started stopwatch with id '+this.uuid)
         this.stopwatch = new Stopwatch();
         this.stopwatch.start();
         this.updateIntervalID = setInterval(this.updateDisplay, 100);

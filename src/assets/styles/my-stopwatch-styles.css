@@ -1,3 +1,11 @@
+div {
+    -webkit-app-region: no-drag;
+}
+
+button {
+    -webkit-app-region: no-drag;
+}
+
 .bordered-section {
     border: 1px;
     border-style: solid;
@@ -11,6 +19,8 @@
     margin-top: 2%;
     margin-bottom: 5%;
     border-radius: 5px;
+    background-color: rgb(134, 176, 173);
+    box-shadow: 0in;
 }
 
 .fa-trash:hover {
@@ -86,7 +96,6 @@
     min-width: 10px;
     padding: 2% 2% 2% 2%;
     border-radius: 5px;
-    background-color: bisque;
 }
 
 .my-stopwatch-trash-div {
