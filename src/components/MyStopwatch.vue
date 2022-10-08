@@ -1,27 +1,25 @@
 <template>
-  <div class="my-stopwatch-container">
-    <div class="my-stopwatch-body rounded">
-      <div class="my-stopwatch-task">
-        <div class="my-stopwatch-text-div">
-          <span contenteditable @input="onInput" class="my-stopwatch-text heading">{{ task }}</span>
-        </div>
-        <div class="my-stopwatch-trash-div">
-          <font-awesome-icon icon="fa-solid fa-trash" @click="deleteStopwatch"/>
-        </div>
+  <div class="my-stopwatch-body rounded">
+    <div class="my-stopwatch-task">
+      <div class="my-stopwatch-text-div">
+        <span contenteditable @input="onInput" class="my-stopwatch-text heading">{{ task }}</span>
       </div>
-      <div class="my-stopwatch-clock bordered-section">
-        <span class="my-stopwatch-clock-text heading">{{ timeString }}</span>
+      <div class="my-stopwatch-trash-div">
+        <font-awesome-icon icon="fa-solid fa-trash" @click="deleteStopwatch"/>
       </div>
-      <div class="my-stopwatch-buttons">
-        <div class="my-stopwatch-start-button-div">
-          <button class="my-stopwatch-start-button button" @click="startStopwatch">Start</button>
-        </div>
-        <div class="my-stopwatch-stop-button-div">
-          <button class="my-stopwatch-stop-button button" @click="stopStopwatch">Stop</button>
-        </div>
-        <div class="my-stopwatch-save-button-div">
-          <button class="my-stopwatch-save-button button" @click="saveStopwatch">Save</button>
-        </div>
+    </div>
+    <div class="my-stopwatch-clock bordered-section">
+      <span class="my-stopwatch-clock-text heading">{{ timeString }}</span>
+    </div>
+    <div class="my-stopwatch-buttons">
+      <div class="my-stopwatch-start-button-div">
+        <button class="my-stopwatch-start-button button" @click="startStopwatch">Start</button>
+      </div>
+      <div class="my-stopwatch-stop-button-div">
+        <button class="my-stopwatch-stop-button button" @click="stopStopwatch">Stop</button>
+      </div>
+      <div class="my-stopwatch-save-button-div">
+        <button class="my-stopwatch-save-button button" @click="saveStopwatch">Save</button>
       </div>
     </div>
   </div>
