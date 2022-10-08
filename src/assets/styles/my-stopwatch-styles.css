@@ -97,6 +97,7 @@ button {
     height: auto;
     padding: 2% 2% 2% 2%;
     border-radius: 5px;
+    background-color: rgb(201, 201, 236);
 }
 
 .my-stopwatch-clock-text {

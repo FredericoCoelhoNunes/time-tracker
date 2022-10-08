@@ -1,8 +1,11 @@
+/* eslint-disable */
+import { Pane } from 'tweakpane';
+
 function createPreferencesPane() {
     /* Creates the pane with the different preference options.
        TODO: DRY this up (one subfunction for each folder in the panel i.e.: each storage type)
     */
-    const pane = new Tweakpane.Pane({
+    const pane = new Pane({
         container: document.getElementById('container'),
         title: "Preferences"
     });

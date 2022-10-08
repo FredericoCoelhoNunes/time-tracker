@@ -1,6 +1,6 @@
 /*
 Deprecated - since I adopted a frameless window, I lost access to the menu,
-so I need to open the preferences in a different way.
+so I need to open the preferences in a different way (through a button click on the app's body).
 Leaving this here for learning purposes and for future reference.
 */
 import { app, Menu } from 'electron';

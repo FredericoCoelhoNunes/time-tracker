@@ -7,8 +7,13 @@ function createPrefsWindow(parentWindow) {
     // Creates a Window for user preferences.
     const prefsWindow = new BrowserWindow(
         {
-            width: 500,
-            height: 400,
+            ...(
+                process.env.IS_WSL != 'true' && {
+                transparent: true,
+                hasShadow: false,
+            }),
+            width: 300,
+            height: 250,
             show: true,
             parent: parentWindow,
             modal: true,
@@ -17,12 +22,16 @@ function createPrefsWindow(parentWindow) {
                 nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
                 contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
                 // preload.js exposes the electron API to allow sending preferences to the main
-                preload: path.join(__dirname, '..', 'src', 'preload.js')
+                preload: path.join(__dirname, 'preload.js')
             }
         },
     )
-    // prefsWindow.webContents.openDevTools()
-    prefsWindow.loadURL('file://' + __dirname + '/../src/menu/preferences_menu/prefs.html')
+
+    if (process.env.WEBPACK_DEV_SERVER_URL) {
+        prefsWindow.loadURL(process.env.WEBPACK_DEV_SERVER_URL + 'preferences')
+    } else {
+        prefsWindow.loadURL('app://./preferences.html')
+    }
     prefsWindow.removeMenu();
         
     // Handler to select file (registered here since we want the dialog to open as a modal to this window)

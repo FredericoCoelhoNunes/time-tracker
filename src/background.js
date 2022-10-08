@@ -5,7 +5,6 @@ import {
   app,
   protocol,
   BrowserWindow,
-  Menu,
   ipcMain,
 } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
@@ -27,13 +26,18 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window and the menu + submenu handlers.
   const win = new BrowserWindow({
+    // WSL doesn't support a load of these properties
+    ...(
+      process.env.IS_WSL != 'true' 
+      && 
+      {
+        transparent: true,
+        hasShadow: false,
+        frame: false,
+      }
+    ), 
     width: 350,
-    // width: 800,
-    // maxWidth: 420,
     height: 600,
-    hasShadow: false,
-    frame: false,
-    transparent: true, 
     maximizable: false,
     webPreferences: {
       
@@ -42,7 +46,7 @@ async function createWindow() {
       nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       // Enables communicating with the main process (to save data)
-      preload: path.join(__dirname, '..', 'src', 'preload.js')
+      preload: path.join(__dirname, 'preload.js')
     }
   })
 
@@ -51,7 +55,6 @@ async function createWindow() {
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
     // if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
-    createProtocol('app')
     // Load the index.html when not in development
     win.loadURL('app://./index.html')
   }
@@ -85,6 +88,10 @@ app.on('ready', async () => {
     } catch (e) {
       console.error('Vue Devtools failed to install:', e.toString())
     }
+  }
+
+  if (!process.env.WEBPACK_DEV_SERVER_URL) {
+    createProtocol('app')
   }
 
   createWindow().then((win) => {
