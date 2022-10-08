@@ -16,10 +16,10 @@ button {
 
 .stopwatch-section {
   display: flex;
-  width: 98%;
+  width: 95%;
   flex-direction: column;
   align-items: flex-end;       /* right-align the image */
-  justify-content: right;     /* vertically center all content */
+  justify-content: flex-start;     /* vertically center all content */
 }
 
 .add-stopwatch-container {
@@ -36,8 +36,9 @@ button {
 .stopwatch-list {
     width: 100%;
     display: flex;
-    align-items: right;
     flex-direction: column;
+    align-items: flex-end;       /* right-align the image */
+    justify-content: center;     /* vertically center all content */
 }
 .title-and-exit-button {
   display: flex;
