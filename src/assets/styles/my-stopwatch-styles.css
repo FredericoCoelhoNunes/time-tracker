@@ -18,19 +18,7 @@ button {
 
 .my-stopwatch-body {
     height: 60px;
-    /* display: flex; */
-    /* width: 70%; */
-    /* align-self: right; */
-    /* flex-direction: column;
-    justify-content: center;
-    max-width: 95%;
-    max-height: 120px;
-    margin-top: 2%;
-    margin-bottom: 2%;
-    border-radius: 5px;
-    background-color: rgb(134, 176, 173);
-    box-shadow: 0in;
-    transition: 0.5s ease-out 0.2s */
+    margin-top: 5%;
 }
 
 .my-stopwatch-body:hover {
@@ -82,7 +70,7 @@ button {
 
 .my-stopwatch-stop-button-div {
     width: 33%;
-    margin: 2% 40% 2% 2%;
+    margin: 2% 35% 2% 2%;
 }
 
 .my-stopwatch-stop-button {
@@ -102,8 +90,10 @@ button {
 
 .my-stopwatch-clock {
     text-align: center;
-    align
+    /* align */
     width: 50%;
+    margin-right: 25%;
+    margin-left: 25%;
     height: auto;
     padding: 2% 2% 2% 2%;
     border-radius: 5px;
