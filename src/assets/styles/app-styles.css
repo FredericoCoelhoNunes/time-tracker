@@ -10,36 +10,33 @@ button {
   -webkit-app-region: no-drag;
 }
 
-.main-window {
-  display: flex;
-}
-
 .stopwatch-section {
   display: flex;
-  width: 95%;
   flex-direction: column;
-  align-items: flex-end;       /* right-align the image */
-  justify-content: flex-start;     /* vertically center all content */
+  width: 95%;
+  align-items: flex-end;    
+  justify-content: flex-end;
+}
+
+.stopwatch-list {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: flex-end; */
+    /* justify-content: center; */
 }
 
 .add-stopwatch-container {
   background-color: black;
   color: white;
-  width: 50%;
   text-align: center;
+  width: 50%;
   padding: 2% 2% 2% 2%;
 }
 .add-stopwatch-container > button {
   margin: 5% 5% 5% 5%;
 }
 
-.stopwatch-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;       /* right-align the image */
-    justify-content: center;     /* vertically center all content */
-}
 .title-and-exit-button {
   display: flex;
   width: 100%;

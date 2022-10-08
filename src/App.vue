@@ -1,25 +1,23 @@
 <template>
   <div id="app">
-    <div class="main-window">
-      <div class="stopwatch-section">
-        <div class="add-stopwatch-container">
-            <div class="title-and-exit-button">
-              <span>Time Tracker</span>
-              <div class="window-close-div">
-                <font-awesome-icon icon="fa fa-window-close" class="fa-window-close" @click="closeApp"/>
-              </div>
+    <div class="stopwatch-section">
+      <div class="add-stopwatch-container">
+          <div class="title-and-exit-button">
+            <span>Time Tracker</span>
+            <div class="window-close-div">
+              <font-awesome-icon icon="fa fa-window-close" class="fa-window-close" @click="closeApp"/>
             </div>
-          <button type="preferences" @click="openPreferences">Preferences</button>
-          <button type="button" @click="addStopwatch">Add Stopwatch</button>
-        </div>
-        <div class="stopwatch-list">
-          <my-stopwatch
-          v-for="(stopwatch, index) in stopwatches"
-          :key="stopwatch.uuid"
-          @saveStopwatch="(data) => saveStopwatch(index, data)"
-          @deleteStopwatch="deleteStopwatch(index)"
-          />
-        </div>
+          </div>
+        <button type="preferences" @click="openPreferences">Preferences</button>
+        <button type="button" @click="addStopwatch">Add Stopwatch</button>
+      </div>
+      <div class="stopwatch-list">
+        <my-stopwatch
+        v-for="(stopwatch, index) in stopwatches"
+        :key="stopwatch.uuid"
+        @saveStopwatch="(data) => saveStopwatch(index, data)"
+        @deleteStopwatch="deleteStopwatch(index)"
+        />
       </div>
     </div>
   </div>

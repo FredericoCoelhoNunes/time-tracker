@@ -17,19 +17,20 @@ button {
 }
 
 .my-stopwatch-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 70%;
-    max-width: 95%;
     height: 60px;
+    /* display: flex; */
+    /* width: 70%; */
+    /* align-self: right; */
+    /* flex-direction: column;
+    justify-content: center;
+    max-width: 95%;
     max-height: 120px;
     margin-top: 2%;
     margin-bottom: 2%;
     border-radius: 5px;
     background-color: rgb(134, 176, 173);
     box-shadow: 0in;
-    transition: 0.5s ease-out 0.2s
+    transition: 0.5s ease-out 0.2s */
 }
 
 .my-stopwatch-body:hover {
@@ -100,7 +101,9 @@ button {
 }
 
 .my-stopwatch-clock {
-    align-self: center;
+    text-align: center;
+    align
+    width: 50%;
     height: auto;
     padding: 2% 2% 2% 2%;
     border-radius: 5px;
