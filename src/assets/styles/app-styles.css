@@ -1,36 +1,68 @@
-.main-window {
-  display: flex;
-  width: 100%;
+html * {
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+div {
+  border-radius: 5px;
 }
 
 button {
   -webkit-app-region: no-drag;
 }
 
+.main-window {
+  display: flex;
+}
+
+.stopwatch-section {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-end;       /* right-align the image */
+  justify-content: center;     /* vertically center all content */
+}
+
 .add-stopwatch-container {
   background-color: black;
   color: white;
-  font-family: "Lucida Console", "Courier New", monospace;
+  width: 50%;
   text-align: center;
-  padding: 5% 5% 5% 5%;
+  padding: 2% 2% 2% 2%;
 }
 .add-stopwatch-container > button {
   margin: 5% 5% 5% 5%;
 }
 
-.stopwatch-section {
+.stopwatch-list {
+    width: 100%;
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    flex-direction: column;
+}
+.title-and-exit-button {
   display: flex;
-  width: 50%;
-  flex-direction: column;
-  margin: 2% 2% 2% 2%;
+  width: 100%;
+  padding: 3% 3% 3% 3%;
+  flex-direction: row;
 }
 
-.stopwatch-list {
-    flex: 0 0 auto;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: space-between;
+.title-and-exit-button > span {
+  width: 80%;
 }
+
+.fa-window-close:hover {
+  transition: 0.2s ease-out;
+  color: rgb(196, 54, 54);
+}
+
+.window-close-div {
+  width: 10%;
+  margin-left: 5%;
+  align-self: right;
+  -webkit-app-region: no-drag;
+  text-align: center;
+  vertical-align: middle;
+
+}
+

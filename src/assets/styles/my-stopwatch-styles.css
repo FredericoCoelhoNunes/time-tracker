@@ -1,3 +1,7 @@
+html * {
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
 div {
     -webkit-app-region: no-drag;
 }
@@ -15,12 +19,13 @@ button {
 .my-stopwatch-body {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 100%;
     margin-top: 2%;
     margin-bottom: 5%;
     border-radius: 5px;
     background-color: rgb(134, 176, 173);
     box-shadow: 0in;
+    align-self: right;
 }
 
 .fa-trash:hover {
@@ -89,6 +94,8 @@ button {
     width: 90%;
     align-self: center;
     border-radius: 5px;
+    font-family: "Lucida Console", "Courier New", monospace;
+
 }
 
 .my-stopwatch-text {

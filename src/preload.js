@@ -9,6 +9,7 @@ const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('electronAPI', {
     savePrefs: (prefs) => ipcRenderer.send('save-prefs', prefs),
     saveStopwatch: (stopwatchData) => ipcRenderer.send('save-stopwatch', stopwatchData),
-    selectFile: (method, config) => ipcRenderer.invoke('select-file', method, config)
-    openPreferences: (method, config) => ipcRenderer.invoke('select-file', method, config)
+    selectFile: (method, config) => ipcRenderer.invoke('select-file', method, config),
+    openPreferences: () => ipcRenderer.send('open-preferences'),
+    closeApp: () => ipcRenderer.send('close-app')
 })

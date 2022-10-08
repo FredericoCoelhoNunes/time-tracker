@@ -7,8 +7,8 @@ function createPrefsWindow(parentWindow) {
     // Creates a Window for user preferences.
     const prefsWindow = new BrowserWindow(
         {
-            width: 800,
-            height: 800,
+            width: 500,
+            height: 400,
             show: true,
             parent: parentWindow,
             modal: true,
@@ -21,13 +21,13 @@ function createPrefsWindow(parentWindow) {
             }
         },
     )
-    prefsWindow.webContents.openDevTools()
+    // prefsWindow.webContents.openDevTools()
     prefsWindow.loadURL('file://' + __dirname + '/../src/menu/preferences_menu/prefs.html')
     prefsWindow.removeMenu();
         
     // Handler to select file (registered here since we want the dialog to open as a modal to this window)
-    ipcMain.handle('select-file', async (event, method, params) => {       
-        return dialog[method](params);
+    ipcMain.handle('select-file', (event, method, params) => {       
+        return dialog[method](prefsWindow, params);
     });
 
     // We also need to deregister this handler everytime we close the window, or else it would throw an

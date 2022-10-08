@@ -10,9 +10,10 @@ import {
 } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-import { createMainMenu } from './menu/main_menu.js'
 import { handleSavePrefs } from './storage/prefs_storage.js'
 import { createStorage } from './storage/stopwatch_storage.js'
+import { createPrefsWindow } from './menu/preferences_menu/prefs_window.js'
+
 
 const path = require('path')
 
@@ -27,7 +28,10 @@ async function createWindow() {
   // Create the browser window and the menu + submenu handlers.
   const win = new BrowserWindow({
     width: 350,
+    // width: 800,
+    // maxWidth: 420,
     height: 600,
+    hasShadow: false,
     frame: false,
     transparent: true, 
     maximizable: false,
@@ -45,7 +49,7 @@ async function createWindow() {
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL)
-    if (!process.env.IS_TEST) win.webContents.openDevTools()
+    // if (!process.env.IS_TEST) win.webContents.openDevTools()
   } else {
     createProtocol('app')
     // Load the index.html when not in development
@@ -84,15 +88,16 @@ app.on('ready', async () => {
   }
 
   createWindow().then((win) => {
-    // Setting the menu
-    Menu.setApplicationMenu(createMainMenu(win));
-
     // Instantiating the storage
     let storage = createStorage();
     // Handler to save preferences
     ipcMain.on('save-prefs', (event, prefs) => handleSavePrefs(prefs, storage));
     // Handler to save stopwatch data
-    ipcMain.on('save-stopwatch', (event) => props.storage.saveStopwatch());
+    ipcMain.on('save-stopwatch', (event, stopwatchData) => storage.saveStopwatch());
+    // Handler to open the preferences window
+    ipcMain.on('open-preferences', (event) => createPrefsWindow(win));
+    // Handler to close the app
+    ipcMain.on('close-app', (event) => win.close());
   })
 })
 

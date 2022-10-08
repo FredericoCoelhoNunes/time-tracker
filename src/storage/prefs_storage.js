@@ -13,22 +13,14 @@ function handleSavePrefs(prefs, storage) {
     console.log('File used for Persisting Data - ' + settings.file());
 
     if (!prefs.storage_type) {
-        new Notification({ title: "Failed to set preferences", body: "Please set a storage type!" }).show()
+        new Notification({ title: "Failed to set preferences.", body: "Please set a storage type!" }).show()
         return
+    } else {
+        new Notification({ title: "Preferences saved succesfully!", body: "Preferences saved in " + settings.file() + '.'}).show()
+
     }
 
     settings.set(prefs);
-    
-    // settings.get('key.data').then(value => {
-    //     console.log('Persisted Value - ' + value);
-    // })
-    
-    // settings.has('key1.data').then(bool => {
-    //     console.log('Checking if key1.data Exists - ' + bool)
-    // });
-
-    // Should update the storage
-    // console.log(props.storage.saveStopwatch());
 }
 
 export { handleSavePrefs }

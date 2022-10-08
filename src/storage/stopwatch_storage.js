@@ -29,7 +29,7 @@
         console.log('creating storage file')
     }
   
-    saveStopwatch(event, stopwatchData) {
+    saveStopwatch(stopwatchData) {
       console.log("Saving stopwatch to file")
     }
   }
