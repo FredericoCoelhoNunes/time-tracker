@@ -63,9 +63,11 @@ export default {
   },
   data() {
     return {
-      task: 'New Task',
+      task: 'New task',
+      startTime: "",
       timeString: '00:00:00',
-      stopwatchState: "Paused"
+      stopwatchState: "Never Started",
+      endTime: ""
     }
   },
   emits: ['saveStopwatch', 'deleteStopwatch'],
@@ -77,6 +79,7 @@ export default {
       if (!this.stopwatch) {
         this.stopwatch = new Stopwatch();
         this.stopwatch.start();
+        this.startTime = new Date();
         this.updateIntervalID = setInterval(this.updateDisplay, 100);
       } else if (this.stopwatchState == "Paused") {
         this.stopwatch.reset();
@@ -90,6 +93,7 @@ export default {
       if (this.stopwatchState == "Running") {
         this.curr_time = this.stopwatch.stop();
         this.stopwatchState = "Paused";
+        this.endTime = new Date();
       }
     },
     saveStopwatch() {
@@ -97,7 +101,6 @@ export default {
       if (this.updateIntervalID) {
         clearInterval(this.updateIntervalID);  
       }
-      this.stopwatchState = 'Locked';
       this.$emit('saveStopwatch', this.$data);
     },
     deleteStopwatch() {
@@ -106,7 +109,6 @@ export default {
       if (this.updateIntervalID) {
         clearInterval(this.updateIntervalID);  
       }
-      this.stopwatchState = 'Locked';
       this.$emit('deleteStopwatch');
     },
     updateDisplay() {

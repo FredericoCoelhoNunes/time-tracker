@@ -12,6 +12,7 @@ import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 import { handleSavePrefs } from './storage/prefs_storage.js'
 import { createStorage } from './storage/stopwatch_storage.js'
 import { createPrefsWindow } from './menu/preferences_menu/prefs_window.js'
+import { createCalendarWindow } from './calendar/calendar_window.js'
 
 
 const path = require('path')
@@ -26,7 +27,7 @@ protocol.registerSchemesAsPrivileged([
 async function createWindow() {
   // Create the browser window and the menu + submenu handlers.
   const win = new BrowserWindow({
-    // WSL doesn't support a load of these properties
+    // WSL doesn't support these properties
     ...(
       process.env.IS_WSL != 'true' 
       && 
@@ -100,9 +101,15 @@ app.on('ready', async () => {
     // Handler to save preferences
     ipcMain.on('save-prefs', (event, prefs) => handleSavePrefs(prefs, storage));
     // Handler to save stopwatch data
-    ipcMain.on('save-stopwatch', (event, stopwatchData) => storage.saveStopwatch());
+    ipcMain.handle('save-stopwatch', (event, stopwatchData) => {
+      let wasSuccessful = storage.saveStopwatch(stopwatchData);
+      console.log(wasSuccessful);
+      return wasSuccessful
+    });
     // Handler to open the preferences window
     ipcMain.on('open-preferences', (event) => createPrefsWindow(win));
+    // Handler to open the calendar
+    ipcMain.on('open-calendar', (event) => createCalendarWindow(win));
     // Handler to close the app
     ipcMain.on('close-app', (event) => win.close());
   })

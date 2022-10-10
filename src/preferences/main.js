@@ -21,12 +21,13 @@ function createPreferencesPane() {
             'Filesystem Storage': 'fs_storage',
             'S3 Storage': 's3_storage',
         },
+        label: "Storage Type"
     });
 
     // FS Storage options
     pane.addSeparator();
     const FS_STORAGE_PARAMS = {
-        'folder_location': '',
+        'storage_location': '',
     }
 
     const fs_storage_options_folder = pane.addFolder({
@@ -35,7 +36,7 @@ function createPreferencesPane() {
     });
     fs_storage_options_folder.disabled = true;
 
-    const folder_location = fs_storage_options_folder.addInput(FS_STORAGE_PARAMS, 'folder_location');
+    const storage_location = fs_storage_options_folder.addInput(FS_STORAGE_PARAMS, 'storage_location', { label: "Storage Folder"});
 
     const select_folder_btn = fs_storage_options_folder.addButton({
         title: 'Select Folder',
@@ -50,7 +51,7 @@ function createPreferencesPane() {
         window.electronAPI.selectFile(
             'showOpenDialog', dialogConfig
         ).then(result => {
-            folder_location.controller_.binding.value.rawValue = result.filePaths[0];
+            storage_location.controller_.binding.value.rawValue = result.filePaths[0];
         });
     });
 
@@ -66,7 +67,7 @@ function createPreferencesPane() {
     });
     s3_storage_options_folder.disabled = true;
 
-    s3_storage_options_folder.addInput(S3_STORAGE_PARAMS, 'bucket_location');
+    s3_storage_options_folder.addInput(S3_STORAGE_PARAMS, 'bucket_location', { label: "Bucket Location"});
 
     // Button to save results
     pane.addSeparator();

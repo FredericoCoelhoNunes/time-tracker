@@ -22,29 +22,28 @@ button {
     width: 95%;
     display: flex;
     flex-direction: column;
-    /* align-items: flex-end; */
-    /* justify-content: center; */
 }
 
 .add-stopwatch-container {
   background-color: black;
   color: white;
   text-align: center;
-  width: 50%;
+  width: 60%;
   padding: 2% 2% 2% 2%;
 }
 .add-stopwatch-container > button {
   margin: 5% 5% 5% 5%;
 }
 
-.title-and-exit-button {
+.title-and-main-buttons {
   display: flex;
   width: 100%;
   padding: 3% 3% 3% 3%;
   flex-direction: row;
+  align-content: space-between;
 }
 
-.title-and-exit-button > span {
+.title-and-main-buttons > span {
   width: 80%;
 }
 
@@ -53,13 +52,26 @@ button {
   color: rgb(196, 54, 54);
 }
 
+.fa-calendar:hover {
+  transition: 0.2s ease-out;
+  color: rgb(47, 187, 42);
+}
+
 .window-close-div {
   width: 10%;
-  margin-left: 5%;
+  margin-right: 5%;
   align-self: right;
   -webkit-app-region: no-drag;
   text-align: center;
   vertical-align: middle;
+}
 
+.show-calendar-div {
+  width: 10%;
+  /* margin-left: 5%; */
+  align-self: left;
+  -webkit-app-region: no-drag;
+  text-align: center;
+  vertical-align: middle;
 }
 

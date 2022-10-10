@@ -13,7 +13,7 @@ function createPrefsWindow(parentWindow) {
                 hasShadow: false,
             }),
             width: 300,
-            height: 250,
+            height: 300,
             show: true,
             parent: parentWindow,
             modal: true,

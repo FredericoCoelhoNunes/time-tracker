@@ -2,7 +2,10 @@
   <div id="app">
     <div class="stopwatch-section">
       <div class="add-stopwatch-container">
-          <div class="title-and-exit-button">
+          <div class="title-and-main-buttons">
+            <div class="show-calendar-div">
+              <font-awesome-icon icon="fa fa-calendar" class="fa-calendar" @click="openCalendar"/>
+            </div>
             <span>Time Tracker</span>
             <div class="window-close-div">
               <font-awesome-icon icon="fa fa-window-close" class="fa-window-close" @click="closeApp"/>
@@ -32,10 +35,11 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
+import { faWindowClose, faCalendar } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
 library.add(faWindowClose)
+library.add(faCalendar)
 
 // Importing the stopwatch component
 import MyStopwatch from "./components/MyStopwatch.vue";
@@ -63,14 +67,21 @@ export default {
     },
     saveStopwatch(index, stopwatchData) {
       // signalling to main process to save the stopwatch data
-      window.electronAPI.saveStopwatch(JSON.stringify(stopwatchData));
-      this.stopwatches.splice(index, 1);
+      window.electronAPI.saveStopwatch(JSON.stringify(stopwatchData)).then((wasSuccessful) => {
+        console.log(wasSuccessful)
+        if (wasSuccessful) {
+          this.stopwatches.splice(index, 1);
+        }
+      });
     },
     deleteStopwatch(index) {
       this.stopwatches.splice(index, 1);
     },
     closeApp() {
       window.electronAPI.closeApp();
+    },
+    openCalendar() {
+      window.electronAPI.openCalendar();
     }
   },
 };

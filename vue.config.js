@@ -40,6 +40,7 @@ module.exports = defineConfig({
     // template is inferred to be `public/preferences.html`
     // and falls back to `public/index.html` if not found.
     // Output filename is inferred to be `preferences.html`.
-    preferences: 'src/preferences/main.js'
+    preferences: 'src/preferences/main.js',
+    calendar: 'src/calendar/main.js'
   }
 })
