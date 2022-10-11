@@ -1,5 +1,6 @@
 // Defines a new Window to be used for the user preferences
 import { BrowserWindow, ipcMain, dialog } from 'electron'
+const path = require('path')
 
 
 function createCalendarWindow(parentWindow) { 
@@ -14,7 +15,8 @@ function createCalendarWindow(parentWindow) {
             webPreferences: {
                 nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
                 contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-            }
+                preload: path.join(__dirname, 'preload.js')
+            },
         },
     )
 
@@ -24,6 +26,7 @@ function createCalendarWindow(parentWindow) {
         calendarWindow.loadURL('app://./calendar.html')
     }
     calendarWindow.removeMenu();
+    if (!process.env.IS_TEST) calendarWindow.webContents.openDevTools();
 
     return calendarWindow
 }

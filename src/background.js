@@ -7,13 +7,14 @@ import {
   BrowserWindow,
   ipcMain,
 } from 'electron'
+import { createStorage } from './storage/stopwatch_storage.js'
+import {
+  setSavePreferencesHandlers,
+  setMainWindowHandlers,
+  setStorageHandlers
+} from './event_handlers/setup_handlers.js'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
-import { handleSavePrefs } from './storage/prefs_storage.js'
-import { createStorage } from './storage/stopwatch_storage.js'
-import { createPrefsWindow } from './menu/preferences_menu/prefs_window.js'
-import { createCalendarWindow } from './calendar/calendar_window.js'
-
 
 const path = require('path')
 
@@ -95,24 +96,13 @@ app.on('ready', async () => {
     createProtocol('app')
   }
 
-  createWindow().then((win) => {
+  createWindow().then(async (win) => {
     // Instantiating the storage
-    let storage = createStorage();
-    // Handler to save preferences
-    ipcMain.on('save-prefs', (event, prefs) => handleSavePrefs(prefs, storage));
-    // Handler to save stopwatch data
-    ipcMain.handle('save-stopwatch', (event, stopwatchData) => {
-      let wasSuccessful = storage.saveStopwatch(stopwatchData);
-      console.log(wasSuccessful);
-      return wasSuccessful
-    });
-    // Handler to open the preferences window
-    ipcMain.on('open-preferences', (event) => createPrefsWindow(win));
-    // Handler to open the calendar
-    ipcMain.on('open-calendar', (event) => createCalendarWindow(win));
-    // Handler to close the app
-    ipcMain.on('close-app', (event) => win.close());
-  })
+    let storage = await createStorage();
+    setMainWindowHandlers(win);
+    setStorageHandlers(storage);
+    setSavePreferencesHandlers();
+  });
 })
 
 // Exit cleanly on request from parent process in development mode.

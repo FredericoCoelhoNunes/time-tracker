@@ -19,7 +19,7 @@
         <button class="my-stopwatch-stop-button button" @click="stopStopwatch">Stop</button>
       </div>
       <div class="my-stopwatch-save-button-div">
-        <button class="my-stopwatch-save-button button" @click="saveStopwatch">Save</button>
+        <button class="my-stopwatch-save-button button" @click="saveStopwatch" v-if="startTime">Save</button>
       </div>
     </div>
   </div>
@@ -98,17 +98,10 @@ export default {
     },
     saveStopwatch() {
       this.stopStopwatch();
-      if (this.updateIntervalID) {
-        clearInterval(this.updateIntervalID);  
-      }
       this.$emit('saveStopwatch', this.$data);
     },
     deleteStopwatch() {
-      // TODO: dry! (repeated block of code)
       this.stopStopwatch();
-      if (this.updateIntervalID) {
-        clearInterval(this.updateIntervalID);  
-      }
       this.$emit('deleteStopwatch');
     },
     updateDisplay() {

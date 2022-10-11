@@ -12,5 +12,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     selectFile: (method, config) => ipcRenderer.invoke('select-file', method, config),
     openPreferences: () => ipcRenderer.send('open-preferences'),
     openCalendar: () => ipcRenderer.send('open-calendar'),
-    closeApp: () => ipcRenderer.send('close-app')
+    closeApp: () => ipcRenderer.send('close-app'),
+    loadStopwatches: () => ipcRenderer.invoke('load-stopwatches')
 })

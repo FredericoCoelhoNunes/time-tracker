@@ -13,11 +13,10 @@ function createPrefsWindow(parentWindow) {
                 hasShadow: false,
             }),
             width: 300,
-            height: 300,
+            height: 500,
             show: true,
             parent: parentWindow,
             modal: true,
-            // process, so they are saved. 
             webPreferences: {
                 nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
                 contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,

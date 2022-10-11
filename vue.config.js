@@ -8,8 +8,6 @@ module.exports = defineConfig({
     }
   },
 
-  transpileDependencies: true,
-
   configureWebpack: {
     plugins: [
       new NodePolyfillPlugin()

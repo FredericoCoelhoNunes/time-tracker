@@ -13,16 +13,17 @@ function createPreferencesPane() {
     // controls displaying the right properties 
     const TOP_LEVEL_PARAMS = {
         'storage_type': '',
+        'backup_to_s3': false
     }
 
     const storageType = pane.addInput(TOP_LEVEL_PARAMS, 'storage_type', {
         options: {
             none: '',
-            'Filesystem Storage': 'fs_storage',
-            'S3 Storage': 's3_storage',
+            'Filesystem Storage': 'fs_storage'
         },
         label: "Storage Type"
     });
+    const backupToS3 = pane.addInput(TOP_LEVEL_PARAMS, 'backup_to_s3', { label: "Backup to S3" });
 
     // FS Storage options
     pane.addSeparator();
@@ -55,19 +56,23 @@ function createPreferencesPane() {
         });
     });
 
-    // Cloud storage options
+    // Cloud backup
     pane.addSeparator();
     const S3_STORAGE_PARAMS = {
-        'bucket_location': '',
+        'bucket_name': '',
+        'aws_access_key_id': '',
+        'aws_secret_access_key': '',
     }
 
-    const s3_storage_options_folder = pane.addFolder({
-        title: 'S3 Storage',
+    const s3_backup_folder = pane.addFolder({
+        title: 'S3 Backup',
         expanded: true,
     });
-    s3_storage_options_folder.disabled = true;
+    s3_backup_folder.disabled = true;
 
-    s3_storage_options_folder.addInput(S3_STORAGE_PARAMS, 'bucket_location', { label: "Bucket Location"});
+    s3_backup_folder.addInput(S3_STORAGE_PARAMS, 'bucket_name', { label: "Bucket Name"});
+    s3_backup_folder.addInput(S3_STORAGE_PARAMS, 'aws_access_key_id', { label: "AWS Access Key ID"});
+    s3_backup_folder.addInput(S3_STORAGE_PARAMS, 'aws_secret_access_key', { label: "AWS Secret Access Key"});
 
     // Button to save results
     pane.addSeparator();
@@ -78,7 +83,6 @@ function createPreferencesPane() {
     save_prefs_button.on('click', () => {
         // Sending a message to the main process, to store the preferences, and closes the window
         const prefs = pane.exportPreset();
-        console.log(prefs);
         window.electronAPI.savePrefs(prefs);
         window.close()
     });
@@ -86,7 +90,6 @@ function createPreferencesPane() {
     // All panes + event handler to disable panes according to changes on the storageType top level option
     const allPanes = {
         'fs_storage': fs_storage_options_folder,
-        's3_storage': s3_storage_options_folder
     }
     storageType.on('change', (ev) => {
         for (const [key, pane_folder] of Object.entries(allPanes)) {
@@ -96,6 +99,15 @@ function createPreferencesPane() {
                 pane_folder.disabled = true;
             }
         };
+    })
+
+    // Enable the cloud backup pane
+    backupToS3.on('change', (ev) => {
+        if (ev.value) {
+            s3_backup_folder.disabled = false;
+        } else {
+            s3_backup_folder.disabled = true;
+        }
     })
 
     return pane;

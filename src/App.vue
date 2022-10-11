@@ -68,7 +68,6 @@ export default {
     saveStopwatch(index, stopwatchData) {
       // signalling to main process to save the stopwatch data
       window.electronAPI.saveStopwatch(JSON.stringify(stopwatchData)).then((wasSuccessful) => {
-        console.log(wasSuccessful)
         if (wasSuccessful) {
           this.stopwatches.splice(index, 1);
         }
