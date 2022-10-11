@@ -19,7 +19,7 @@ It was a pretty challenging experience, but I definitely feel like I learned a l
 
 Apart from the basic function/module documentation (I know, I slacked off a bit), you can find my stream-of-consciousness notes on my [Notion journal](https://mountainous-racer-570.notion.site/Time-Tracker-App-dbcdf257709347e7a706d8add3c08ec9).
 
-If you're someone new to programming (using Electron/Vue or otherwise), hopefully these notes will inspire you tonot give up! At least, they show that even someone with a few years of experience hits several walls and bugs when trying to learn something new, it's part of the process :-)
+If you're someone new to programming (using Electron/Vue or otherwise), hopefully these notes will inspire you to not give up! At least, they show that even someone with a few years of experience hits several walls and bugs when trying to learn something new. It's part of the process :-)
 
 ## Instructions
 
