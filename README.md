@@ -13,7 +13,7 @@ I uploaded the Windows build to a [public folder on Google Drive](https://drive.
 
 This was a personal learning project. My goal was to learn some new tools and technologies (Electron, vue, and to some extent asynchronous programming in Javascript), but building something that I could actually use on my day-to-day. In particular, I wanted to gain some knowledge on how to build graphical interfaces/desktop apps since this was missing from my skill set.
 
-It was a pretty challenging experience, but I definitely feel like I learned a lot and had a lof of fun.
+It was a pretty challenging experience, but I definitely feel like I learned a lot and had a lot of fun.
 
 ## Documentation
 
