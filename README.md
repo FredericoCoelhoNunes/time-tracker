@@ -1,4 +1,4 @@
-# time_tracker
+# Time Tracker
 
 ![](https://github.com/FredericoCoelhoNunes/time-tracker/blob/main/media/time_tracker.gif)
 
