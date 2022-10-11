@@ -1,5 +1,7 @@
 # time_tracker
 
+![](https://github.com/FredericoCoelhoNunes/time-tracker/blob/main/media/time_tracker.gif)
+
 ## Introduction
 
 This program is a simple time tracking app: it allows you to start one (or more) stopwatches, label them, and store them locally. It also allows you to back them up to the cloud (on an S3 bucket).
