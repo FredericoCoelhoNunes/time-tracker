@@ -4,11 +4,9 @@ import { createStorage } from '../storage/stopwatch_storage.js'
 const settings = require('electron-settings');
 
 
-async function handleSavePrefs(prefs) {
+function handleSavePrefs(prefs) {
     /* Handles the user saving new preferences.
        Stores the new prefences on the preferences file.
-       Then replaces the storage object by the new type of storage,
-       so the user can start saving to the new storage without restarting the app.
     */
     console.log('File used for Persisting Data - ' + settings.file());
 
@@ -21,11 +19,6 @@ async function handleSavePrefs(prefs) {
 
     // setting the preferences
     settings.set(prefs);
-
-    // recreating the storage
-    let storage = await createStorage();
-    
-    return storage
 }
 
 export { handleSavePrefs }

@@ -99,6 +99,7 @@ app.on('ready', async () => {
   createWindow().then(async (win) => {
     // Instantiating the storage
     let storage = await createStorage();
+
     setMainWindowHandlers(win);
     setStorageHandlers(storage);
     setSavePreferencesHandlers();

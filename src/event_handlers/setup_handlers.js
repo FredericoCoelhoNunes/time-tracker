@@ -2,18 +2,18 @@ import { ipcMain } from 'electron'
 import { handleSavePrefs } from '../preferences/prefs_storage.js'
 import { createPrefsWindow } from '../menu/preferences_menu/prefs_window.js'
 import { createCalendarWindow } from '../calendar/calendar_window.js'
+import { createStorage } from '../storage/stopwatch_storage.js'
 
 // Handler to save preferences and update the storage
 function setSavePreferencesHandlers() {
     /* Sets the handler for saving preferences.
-       Since this creates a new instance of the storage, the storage related event handlers
-       need to be re-registered. 
     */
-    ipcMain.handle('save-prefs', (event, prefs) => {
-        let storage = handleSavePrefs(prefs);
+    ipcMain.on('save-prefs', async (event, prefs) => {
+        handleSavePrefs(prefs);
+        let newStorage = await createStorage();
         ipcMain.removeHandler('save-stopwatch');
         ipcMain.removeHandler('load-stopwatches');
-        // setStorageHandlers(storage);
+        setStorageHandlers(newStorage);
     });
 }
 
@@ -30,7 +30,6 @@ function setMainWindowHandlers(mainWindow) {
 
 function setStorageHandlers(storage) {
     /* Sets the event handlers related to the storage.
-       These need to be deregistered and registered again when storage changes.
     */
     // Handler to save stopwatch data
     ipcMain.handle('save-stopwatch', (event, stopwatchData) => storage.saveStopwatch(stopwatchData));

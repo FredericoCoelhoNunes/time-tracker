@@ -38,6 +38,8 @@ function createPrefsWindow(parentWindow) {
         return dialog[method](prefsWindow, params);
     });
 
+    // if (!process.env.IS_TEST) prefsWindow.webContents.openDevTools()
+
     // We also need to deregister this handler everytime we close the window, or else it would throw an
     // error if we tried opening the preferences again 
     prefsWindow.on('closed', () => ipcMain.removeHandler('select-file'));
