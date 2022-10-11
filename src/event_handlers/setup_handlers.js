@@ -9,8 +9,8 @@ function setSavePreferencesHandler(changeToNewStorageCallback) {
     /* Sets the handler for saving preferences.
     */
     ipcMain.on('save-prefs', async (event, prefs) => {
-        handleSavePrefs(prefs);
-        let newStorage = createStorage();
+        await handleSavePrefs(prefs);
+        let newStorage = await createStorage();
         changeToNewStorageCallback(newStorage);
     });
 }
@@ -26,13 +26,17 @@ function setMainWindowHandlers(mainWindow) {
    ipcMain.on('close-app', (event) => mainWindow.close());
 }
 
-function setDataHandlers(storage) {
+function setDataHandlers(storage_wrapper) {
     /* Sets the event handlers related to the storage.
     */
     // Handler to save stopwatch data
-    ipcMain.handle('save-stopwatch', (event, stopwatchData) => storage.saveStopwatch(stopwatchData));
+    ipcMain.handle('save-stopwatch', (event, stopwatchData) => {
+        return storage_wrapper.storage.saveStopwatch(stopwatchData)
+    });
     // Handles loading the stopwatch data
-    ipcMain.handle('load-stopwatches', (event) => storage.loadData());
+    ipcMain.handle('load-stopwatches', (event) => {
+        return storage_wrapper.storage.loadData();
+    });
 }
 
 export {

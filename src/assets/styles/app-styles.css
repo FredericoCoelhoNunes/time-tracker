@@ -68,7 +68,6 @@ button {
 
 .show-calendar-div {
   width: 10%;
-  /* margin-left: 5%; */
   align-self: left;
   -webkit-app-region: no-drag;
   text-align: center;

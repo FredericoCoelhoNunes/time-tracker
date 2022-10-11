@@ -17,9 +17,8 @@ const AWS = require('aws-sdk');
  */
  class FSStorage extends Storage {
 
-    constructor() {
-      super();
-      this.getSettings().then((settings) => {
+    async init() {
+        const settings = await this.getSettings()
         this.storage_location = settings.storage_location;
         this.bucket_name = settings.bucket_name;
         this.aws_access_key_id = settings.aws_access_key_id;
@@ -28,7 +27,6 @@ const AWS = require('aws-sdk');
         if (this.storage_location) {
           this.outputPath = path.join(this.storage_location, "stopwatches.csv");
         }
-      })
     }
 
     shouldBackupToS3() {
@@ -38,7 +36,7 @@ const AWS = require('aws-sdk');
       } else {
           return false
       }
-  }
+    }
 
     async getSettings() {
       const storage_location = await settings.get('storage_location');
@@ -46,13 +44,14 @@ const AWS = require('aws-sdk');
       const aws_access_key_id = await settings.get('aws_access_key_id')
       const aws_secret_access_key = await settings.get('aws_secret_access_key')
       const backup_to_s3 = await settings.get('backup_to_s3')
-        return {
-            storage_location,
-            bucket_name,
-            aws_access_key_id,
-            aws_secret_access_key,
-            backup_to_s3
-        }
+
+      return {
+          storage_location,
+          bucket_name,
+          aws_access_key_id,
+          aws_secret_access_key,
+          backup_to_s3
+      }
     }
 
     async loadData() {

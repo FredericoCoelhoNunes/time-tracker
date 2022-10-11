@@ -5,6 +5,12 @@ module.exports = defineConfig({
   pluginOptions: {
     electronBuilder: {
       preload: 'src/preload.js',
+      builderOptions: {
+        productName: 'Time Tracker',
+        win: {
+          icon: './stopwatch.ico'
+        }
+      }
     }
   },
 

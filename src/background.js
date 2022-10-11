@@ -1,4 +1,4 @@
-// aka main process
+// This is the Electron "main.process" - it handles creating the Windows and interacting with the local filesystem, for example.
 'use strict'
 
 import {
@@ -26,7 +26,9 @@ protocol.registerSchemesAsPrivileged([
 ])
 
 // Storage
-let storage;
+let storage_wrapper = {
+  storage: null
+};
 
 async function createWindow() {
   // Create the browser window and the menu + submenu handlers.
@@ -102,13 +104,14 @@ app.on('ready', async () => {
   createWindow().then(async (win) => {
 
     // Instantiating the initial storage
-    storage = await createStorage();
+    let st = await createStorage();
+    storage_wrapper.storage = st;
 
     function changeToNewStorage(newStorage) {
-      storage = newStorage;
+      storage_wrapper.storage = newStorage;
     }
 
-    setDataHandlers(storage);
+    setDataHandlers(storage_wrapper);
     setSavePreferencesHandler(changeToNewStorage);
     setMainWindowHandlers(win);
   })

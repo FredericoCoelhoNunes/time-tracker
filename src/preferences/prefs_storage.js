@@ -4,7 +4,7 @@ import { createStorage } from '../storage/stopwatch_storage.js'
 const settings = require('electron-settings');
 
 
-function handleSavePrefs(prefs) {
+async function handleSavePrefs(prefs) {
     /* Handles the user saving new preferences.
        Stores the new prefences on the preferences file.
     */
@@ -18,7 +18,7 @@ function handleSavePrefs(prefs) {
     }
 
     // setting the preferences
-    settings.set(prefs);
+    await settings.set(prefs);
 }
 
 export { handleSavePrefs }

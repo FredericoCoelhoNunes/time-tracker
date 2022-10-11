@@ -6,15 +6,17 @@ async function createStorage() {
     // CreateStorage creates an instance of a subclass of Storage
     // based on the user's preferences
     // A bit pointless for now since it only supports one type of storage!
-    let storageType = await settings.get('storage_type');
+    let storageType = await settings.get('storage_type')
 
     if (storageType === undefined) {
-      storageType = 'fs_storage'
+        storageType = 'fs_storage'
     };
 
     switch(storageType) {
         case "fs_storage":
-            return new FSStorage();
+            let st = new FSStorage();
+            await st.init();
+            return st;
         // Removed this type of storage! It's now an additional option to FSStorage
         // case "s3_storage":  
         //     return new S3Storage();
