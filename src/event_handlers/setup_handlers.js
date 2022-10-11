@@ -5,15 +5,13 @@ import { createCalendarWindow } from '../calendar/calendar_window.js'
 import { createStorage } from '../storage/stopwatch_storage.js'
 
 // Handler to save preferences and update the storage
-function setSavePreferencesHandlers() {
+function setSavePreferencesHandler(changeToNewStorageCallback) {
     /* Sets the handler for saving preferences.
     */
     ipcMain.on('save-prefs', async (event, prefs) => {
         handleSavePrefs(prefs);
-        let newStorage = await createStorage();
-        ipcMain.removeHandler('save-stopwatch');
-        ipcMain.removeHandler('load-stopwatches');
-        setStorageHandlers(newStorage);
+        let newStorage = createStorage();
+        changeToNewStorageCallback(newStorage);
     });
 }
 
@@ -28,7 +26,7 @@ function setMainWindowHandlers(mainWindow) {
    ipcMain.on('close-app', (event) => mainWindow.close());
 }
 
-function setStorageHandlers(storage) {
+function setDataHandlers(storage) {
     /* Sets the event handlers related to the storage.
     */
     // Handler to save stopwatch data
@@ -38,7 +36,7 @@ function setStorageHandlers(storage) {
 }
 
 export {
-    setSavePreferencesHandlers,
+    setSavePreferencesHandler,
     setMainWindowHandlers,
-    setStorageHandlers
+    setDataHandlers
 }

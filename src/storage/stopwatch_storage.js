@@ -1,5 +1,5 @@
 import { FSStorage } from './classes/fsstorage.js'
-import { S3Storage } from './classes/s3storage.js'
+// import { S3Storage } from './classes/s3storage.js'
 const settings = require('electron-settings');
 
 async function createStorage() {

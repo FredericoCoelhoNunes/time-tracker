@@ -7,12 +7,12 @@ import {
   BrowserWindow,
   ipcMain,
 } from 'electron'
-import { createStorage } from './storage/stopwatch_storage.js'
 import {
-  setSavePreferencesHandlers,
+  setSavePreferencesHandler,
   setMainWindowHandlers,
-  setStorageHandlers
+  setDataHandlers
 } from './event_handlers/setup_handlers.js'
+import { createStorage } from './storage/stopwatch_storage.js'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS3_DEVTOOLS } from 'electron-devtools-installer'
 
@@ -24,6 +24,9 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { secure: true, standard: true } }
 ])
+
+// Storage
+let storage;
 
 async function createWindow() {
   // Create the browser window and the menu + submenu handlers.
@@ -97,13 +100,18 @@ app.on('ready', async () => {
   }
 
   createWindow().then(async (win) => {
-    // Instantiating the storage
-    let storage = await createStorage();
 
+    // Instantiating the initial storage
+    storage = await createStorage();
+
+    function changeToNewStorage(newStorage) {
+      storage = newStorage;
+    }
+
+    setDataHandlers(storage);
+    setSavePreferencesHandler(changeToNewStorage);
     setMainWindowHandlers(win);
-    setStorageHandlers(storage);
-    setSavePreferencesHandlers();
-  });
+  })
 })
 
 // Exit cleanly on request from parent process in development mode.
